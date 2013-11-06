@@ -127,8 +127,8 @@ set scrolloff=3
 set guifont=Source\ Code\ Pro
 set guifontwide=WenQuanYi\ Zen\ Hei\ Sharp
 
-set nowrapscan
-set nowrap
+"set nowrapscan
+"set nowrap
 
 " path for gf find and so on
 " set path=.,/wang/Programming/linux-source-3.5.0/include,/usr/include
@@ -156,7 +156,7 @@ Bundle 'vim-scripts/ctags.vim'
 " cscope
 Bundle 'vim-scripts/cscope.vim'
 " OmniCppComplete
-Bundle 'vim-scripts/OmniCppComplete'
+"Bundle 'vim-scripts/OmniCppComplete'
 " 
 Bundle 'vim-scripts/autoload_cscope.vim'
 " nerdtree
@@ -169,6 +169,8 @@ Bundle 'vim-scripts/taglist.vim'
 Bundle 'kien/ctrlp.vim'
 " python 
 Bundle 'vim-scripts/Pydiction'
+" python
+"Bundle 'davidhalter/jedi-vim'
 " html5
 Bundle 'othree/html5.vim'
 " css3
@@ -179,21 +181,26 @@ let g:colorizer_auto_filetype='css,scss,html'
 " SCSS
 Bundle 'tpope/vim-haml'
 " Go
-Bundle 'uggedal/go-vim'
+"Bundle 'uggedal/go-vim'
 " YouCompleteMe
 Bundle 'Valloric/YouCompleteMe'
-" syntasitc
+" syntasitc 支持各种语法检查
 Bundle 'scrooloose/syntastic'
 " nginx syntax
-Bundle 'vim-scripts/nginx.vim'
+"Bundle 'vim-scripts/nginx.vim'
+Bundle 'evanmiller/nginx-vim-syntax'
 " git gutter
 Bundle 'airblade/vim-gitgutter.git'
 " vim-fugitive: git on vim
 Bundle 'tpope/vim-fugitive.git'
-" gitv
+" gitv: based on vim-fugitive
 Bundle 'gregsexton/gitv'
 " surround
 Bundle 'tpope/vim-surround'
+" javascript syntax and indent
+Bundle 'pangloss/vim-javascript'
+" javascript syntax
+Bundle 'jelera/vim-javascript-syntax'
 
 """"""""""" vim-scripts repos """""""""""""
 filetype plugin indent on
@@ -259,15 +266,26 @@ let g:ctrlp_custom_ignore = {
 """""""""""""""""  Python  """"""""""""""""""""""""
 au FileType python setl expandtab
 " Pydiction
-let g:pydiction_location = '~/.vim/Bundle/Pydiction/complete-dict'
-"default g:pydiction_menu_height == 15
-
+let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 " omnicppcomplete for python
 " C-x C-o
 
+" jedi-vim complete key
+"let g:jedi#autocompletion_command = "<C-m>"
+"let g:jedi#popup_select_first = 0
+" jedi-vim pydoc key
+" <Shift-k>
+
 " path
-set path+=/usr/local/lib/python2.7/dist-packages/douban_client-0.0.3-py2.7.egg
-au FileType python setl tags=/usr/local/lib/python2.7/dist-packages/tags
+"set path+=/usr/local/lib/python2.7/dist-packages/douban_client-0.0.3-py2.7.egg
+"au FileType python setl tags=/usr/local/lib/python2.7/dist-packages/tags
 
 """"""""""""""""" Scheme """"""""""""""""""""""""""
 au FileType scheme setl ts=2 sw=2 sts=2
+
+""""""""""""""""" JS """"""""""""""""""""""""""""""
+au filetype js set dictionary=~/.vim/dict/javascript.dict
+
+
+""""""""""""""""" Nginx """""""""""""""""""""""""""
+au BufRead,BufNewFile /usr/local/openresty/nginx/conf/*,~/web/nginxtest/conf/* if &ft == '' | setfiletype nginx | endif

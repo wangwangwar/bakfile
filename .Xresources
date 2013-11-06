@@ -1,0 +1,13 @@
+Xft.dpi:96
+URxvt.background: #000
+URxvt.foreground: #eee
+URxvt.font: xft:WenQuanYi Micro Hei Mono:size=9:antialias=true
+URxvt.scrollBar: false
+
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  chromium
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+Rxvt.savelines: 10000
