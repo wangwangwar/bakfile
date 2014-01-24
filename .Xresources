@@ -2,6 +2,7 @@ Xft.dpi:96
 URxvt.background: #000
 URxvt.foreground: #eee
 URxvt.font: xft:WenQuanYi Micro Hei Mono:size=9:antialias=true
+!URxvt.font: xft:Meslo LG S for Powerline:size=9
 URxvt.scrollBar: false
 
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select

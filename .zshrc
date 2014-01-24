@@ -32,20 +32,17 @@ ZSH_THEME="clean"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git python pip cp z bower)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
-export PATH=/usr/local/heroku/bin:$PATH
-export PATH=~/.gem/ruby/2.0.0/bin:$PATH
-export PATH=~/.rvm/bin:$PATH
-export PATH=/usr/local/openresty/nginx/sbin:$PATH
-
 #export DESKTOP_SESSION=LXDE
 alias bpython2='python2 -m bpython.cli'
 
 # RVM completion
 [[ -r "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# autoenv for python venv
+source ~/.autoenv/activate.sh

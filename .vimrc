@@ -126,10 +126,16 @@ set scrolloff=3
 "set guifont=DejaVu\ Sans\ Mono
 set guifont=Source\ Code\ Pro
 set guifontwide=WenQuanYi\ Zen\ Hei\ Sharp
+" folding for html using indent
+set foldenable
+autocmd Filetype html set foldmethod=indent
+" 自动加载变动文件
+set autoread
 
+" 总是显示状态栏
+set laststatus=2
 "set nowrapscan
 "set nowrap
-
 " path for gf find and so on
 " set path=.,/wang/Programming/linux-source-3.5.0/include,/usr/include
 
@@ -146,11 +152,12 @@ Bundle 'vim-scripts/EasyMotion'
 " pandoc's extended markdown
 "Bundle 'vim-scripts/vim-pandoc'
 " markdown syntax
-Bundle 'hallison/vim-markdown'
+Bundle 'plasticboy/vim-markdown'
+"Bundle 'tpope/vim-markdown'
 " preview markdown, rdoc, textile, html
-Bundle 'vim-scripts/preview'
+"Bundle 'vim-scripts/preview'
 " add support for YAML and Liquid style to built-in markdown syntax
-Bundle 'PProvost/vim-markdown-jekyll'
+"Bundle 'PProvost/vim-markdown-jekyll'
 " ctags
 Bundle 'vim-scripts/ctags.vim'
 " cscope
@@ -160,7 +167,7 @@ Bundle 'vim-scripts/cscope.vim'
 " 
 Bundle 'vim-scripts/autoload_cscope.vim'
 " nerdtree
-Bundle 'scrooloose/nerdtree.git'
+" Bundle 'scrooloose/nerdtree.git'
 " taglist
 Bundle 'vim-scripts/taglist.vim'
 " LustyExplorer
@@ -168,11 +175,19 @@ Bundle 'vim-scripts/taglist.vim'
 " CtrlP
 Bundle 'kien/ctrlp.vim'
 " python 
-Bundle 'vim-scripts/Pydiction'
+"Bundle 'vim-scripts/Pydiction'
 " python
 "Bundle 'davidhalter/jedi-vim'
+" python-mode, including vim-virtualenv, pyflask, pylint ...
+Bundle 'klen/python-mode'
+" YouCompleteMe
+Bundle 'Valloric/YouCompleteMe'
+" syntasitc 支持各种语法检查
+Bundle 'scrooloose/syntastic'
 " html5
 Bundle 'othree/html5.vim'
+" zen coding for vim
+Bundle 'mattn/emmet-vim'
 " css3
 Bundle 'hail2u/vim-css3-syntax'
 " css color preview
@@ -182,12 +197,7 @@ let g:colorizer_auto_filetype='css,scss,html'
 Bundle 'tpope/vim-haml'
 " Go
 "Bundle 'uggedal/go-vim'
-" YouCompleteMe
-Bundle 'Valloric/YouCompleteMe'
-" syntasitc 支持各种语法检查
-Bundle 'scrooloose/syntastic'
 " nginx syntax
-"Bundle 'vim-scripts/nginx.vim'
 Bundle 'evanmiller/nginx-vim-syntax'
 " git gutter
 Bundle 'airblade/vim-gitgutter.git'
@@ -201,7 +211,10 @@ Bundle 'tpope/vim-surround'
 Bundle 'pangloss/vim-javascript'
 " javascript syntax
 Bundle 'jelera/vim-javascript-syntax'
-
+" coffee script
+Bundle 'kchmck/vim-coffee-script'
+" vim airline, better status bar
+Bundle 'bling/vim-airline'
 """"""""""" vim-scripts repos """""""""""""
 filetype plugin indent on
 
@@ -225,10 +238,9 @@ if has("cscope")
   set csverb
   " add any database in current directory
   if filereadable("cscope.out")
-      cs add cscope.out
+    cs add cscope.out
   endif
 endif
-
 nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -237,18 +249,15 @@ nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" quickfix, for cscope
+nmap <leader>cn :cn<cr>
+nmap <leader>cp :cp<cr>
+nmap <leader>cw :cw 10<cr>
 
-"LustyExplorer
-"<Leader>lf  - Opens filesystem explorer.
-"<Leader>lr  - Opens filesystem explorer at the directory of the current file.
-"<Leader>lb  - Opens buffer explorer.
-"<Leader>lg  - Opens buffer grep.
-"set hidden
 
-" ctrlp
+" ctrlp, great file opener
 noremap <C-W><C-U> :CtrlPMRU<CR>
 nnoremap <C-W>u :CtrlPMRU<CR>
-
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_open_new_file='r'
 let g:ctrlp_match_window_bottom=1
@@ -258,27 +267,35 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
 
 """""""""""""""""  Python  """"""""""""""""""""""""
 au FileType python setl expandtab
-" Pydiction
-let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
-" omnicppcomplete for python
-" C-x C-o
-
-" jedi-vim complete key
-"let g:jedi#autocompletion_command = "<C-m>"
-"let g:jedi#popup_select_first = 0
-" jedi-vim pydoc key
-" <Shift-k>
-
 " path
 "set path+=/usr/local/lib/python2.7/dist-packages/douban_client-0.0.3-py2.7.egg
 "au FileType python setl tags=/usr/local/lib/python2.7/dist-packages/tags
+au FileType python setl tags+=/usr/lib/python2.7/tags
+au FileType python setl tags+=~/web/heroku_douban/venv/lib/python2.7/site-packages/werkzeug/tags
+au FileType python setl tags+=~/web/heroku_douban/venv/lib/python2.7/site-packages/jinja2/tags
+au FileType c setl tags=~/program/c/ngx_openresty-1.4.2.9/bundle/nginx-1.4.2/src/tags
+""""""""""""""""" pymode """"""""""""""""""""""""""
+" close rope
+let pymode_rope=0
+""""""""""""""""" syntastic """""""""""""""""""""""
+" Because we have `pymode` which is more powerful for python,
+" we disable `syntastic` in python.
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['python'] }
+"""""""""""""""" YouCompleteMe """"""""""""""""""""
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_invoke_completion = '<C-a>'
+
 
 """"""""""""""""" Scheme """"""""""""""""""""""""""
 au FileType scheme setl ts=2 sw=2 sts=2
@@ -286,6 +303,23 @@ au FileType scheme setl ts=2 sw=2 sts=2
 """"""""""""""""" JS """"""""""""""""""""""""""""""
 au filetype js set dictionary=~/.vim/dict/javascript.dict
 
+""""""""""""""""" HTML """"""""""""""""""""""""""""
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+
+""""""""""""""""" CSS """""""""""""""""""""""""""""
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
 
 """"""""""""""""" Nginx """""""""""""""""""""""""""
 au BufRead,BufNewFile /usr/local/openresty/nginx/conf/*,~/web/nginxtest/conf/* if &ft == '' | setfiletype nginx | endif
+
+""""""""""""""""" coffee """"""""""""""""""""""""""
+autocmd FileType coffee compiler coffee
+autocmd BufWritePost *.coffee silent make!
+" 定义 cfr  为CoffeeRun
+ab cfr CoffeeRun
+
+""""""""""""""""" git """""""""""""""""""""""""""""
+" git commit format
+autocmd Filetype gitcommit setlocal spell textwidth=72
