@@ -174,12 +174,16 @@ Bundle 'vim-scripts/taglist.vim'
 "Bundle 'vim-scripts/LustyExplorer'
 " CtrlP
 Bundle 'kien/ctrlp.vim'
+" C extension for CtrlP
+Bundle 'JazzCore/ctrlp-cmatcher'
 " python 
 "Bundle 'vim-scripts/Pydiction'
 " python
 "Bundle 'davidhalter/jedi-vim'
 " python-mode, including vim-virtualenv, pyflask, pylint ...
 Bundle 'klen/python-mode'
+" python3 syntax and indent
+Bundle 'mitsuhiko/vim-python-combined'
 " YouCompleteMe
 Bundle 'Valloric/YouCompleteMe'
 " syntasitc 支持各种语法检查
@@ -211,10 +215,19 @@ Bundle 'tpope/vim-surround'
 Bundle 'pangloss/vim-javascript'
 " javascript syntax
 Bundle 'jelera/vim-javascript-syntax'
+" js beautify
+Bundle 'maksimr/vim-jsbeautify'
+Bundle 'einars/js-beautify'
 " coffee script
 Bundle 'kchmck/vim-coffee-script'
 " vim airline, better status bar
 Bundle 'bling/vim-airline'
+" code snippets
+Bundle 'drmingdrmer/xptemplate'
+" scheme, slimv
+Bundle 'vim-scripts/slimv.vim'
+" DB, SQL
+Bundle 'vim-scripts/dbext.vim'
 """"""""""" vim-scripts repos """""""""""""
 filetype plugin indent on
 
@@ -267,10 +280,13 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$|(bower_components$|node_modules$)',
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
+"""""""""""""""""""" C """"""""""""""""""""""""""""
+au FileType c setl tags+=~/program/c/ngx_openresty-1.4.2.9/bundle/nginx-1.4.2/src/tags
+au FileType c setl tags+=/usr/include/tags
 
 """""""""""""""""  Python  """"""""""""""""""""""""
 au FileType python setl expandtab
@@ -280,7 +296,8 @@ au FileType python setl expandtab
 au FileType python setl tags+=/usr/lib/python2.7/tags
 au FileType python setl tags+=~/web/heroku_douban/venv/lib/python2.7/site-packages/werkzeug/tags
 au FileType python setl tags+=~/web/heroku_douban/venv/lib/python2.7/site-packages/jinja2/tags
-au FileType c setl tags=~/program/c/ngx_openresty-1.4.2.9/bundle/nginx-1.4.2/src/tags
+au FileType python setl tags+=~/program/python/tornado-master/tags
+au FileType python setl tags+=~/.virtualenvs/common/lib/python3.3/site-package/tags
 """"""""""""""""" pymode """"""""""""""""""""""""""
 " close rope
 let pymode_rope=0
@@ -290,18 +307,29 @@ let pymode_rope=0
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': ['python'] }
+let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_jshint_args=['-c ~/.jshintrc']
 """""""""""""""" YouCompleteMe """"""""""""""""""""
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion = '<C-a>'
+let g:ycm_extra_conf_globlist = ['/*']
+let g:ycm_seed_identifiers_with_syntax = 1
 
 
 """"""""""""""""" Scheme """"""""""""""""""""""""""
 au FileType scheme setl ts=2 sw=2 sts=2
+let g:slimv_swank_cmd = '! urxvt -e racket --load ~/.vim/bundle/slimv.vim/slime/contrib/swank-mit-scheme.scm &'
 
 """"""""""""""""" JS """"""""""""""""""""""""""""""
 au filetype js set dictionary=~/.vim/dict/javascript.dict
+" js beautify
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 """"""""""""""""" HTML """"""""""""""""""""""""""""
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -323,3 +351,6 @@ ab cfr CoffeeRun
 """"""""""""""""" git """""""""""""""""""""""""""""
 " git commit format
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+""""""""""""""""" Markdown """"""""""""""""""""""""
+autocmd Filetype markdown setlocal spell textwidth=72

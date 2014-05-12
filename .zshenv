@@ -22,3 +22,9 @@ export NODE_PATH=/usr/local/lib/node_modules
 
 # editor
 export EDITOR=vim
+
+# go
+export GOPATH=~/program/go
+
+# karma js
+export CHROME_BIN=/usr/bin/chromium

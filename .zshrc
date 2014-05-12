@@ -45,4 +45,7 @@ alias bpython2='python2 -m bpython.cli'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # autoenv for python venv
-source ~/.autoenv/activate.sh
+#source ~/.autoenv/activate.sh
+
+#
+#export http_proxy="http://127.0.0.1:8087"

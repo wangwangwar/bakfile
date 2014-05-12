@@ -32,20 +32,21 @@ xmodmap ~/.Xmodmap
 X_ENV="dwm"
 export LANG=zh_CN.UTF-8
 #export LC_ALL="zh_CN.UTF-8"
-#ibus-daemon -x -d -r -v
 #export XIM=ibus
 #export XIM_PROGRAM="ibus-daemon"
-#export GTK_IM_MODULE=xim
-#export XMODIFIERS="@im=fcitx" 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx" 
 #export XIM_ARGS="--daemonize --xim"
-#export QT_IM_MODULE=xim
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XIM=fcitx
-export XIM_PROGRAM=fcitx
-export XMODIFIERS=@im=ibus
-#fcitx -r
-ibus-daemon -x -d
+fcitx -r
+
+# ibus
+#export GTK_IM_MODULE=ibus
+#export QT_IM_MODULE=ibus
+#export XIM=fcitx
+#export XIM_PROGRAM=fcitx
+#export XMODIFIERS=@im=ibus
+#ibus-daemon -x -d
 
 #while true
 #do
