@@ -228,6 +228,8 @@ Bundle 'drmingdrmer/xptemplate'
 Bundle 'vim-scripts/slimv.vim'
 " DB, SQL
 Bundle 'vim-scripts/dbext.vim'
+" ML
+Bundle 'vim-scripts/sml_polyml.vim'
 """"""""""" vim-scripts repos """""""""""""
 filetype plugin indent on
 
@@ -320,6 +322,9 @@ let g:ycm_seed_identifiers_with_syntax = 1
 
 """"""""""""""""" Scheme """"""""""""""""""""""""""
 au FileType scheme setl ts=2 sw=2 sts=2
+
+""""""""""""""""" Racket """"""""""""""""""""""""""
+let g:paredit_mode = 0
 let g:slimv_swank_cmd = '! urxvt -e racket --load ~/.vim/bundle/slimv.vim/slime/contrib/swank-mit-scheme.scm &'
 
 """"""""""""""""" JS """"""""""""""""""""""""""""""
