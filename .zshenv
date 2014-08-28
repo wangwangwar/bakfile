@@ -5,14 +5,15 @@ export PATH=~/.rvm/bin:$PATH
 export PATH=/usr/local/openresty/nginx/sbin:$PATH
 export PATH=~/program/ruby/vagrant/bin:$PATH
 export PATH=/usr/bin/vendor_perl:$PATH
+export PATH=/usr/lib/smlnj/bin:$PATH
 # pyenv for virtualenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # virtualenvwrapper
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-3.3
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/program/python
 source /usr/bin/virtualenvwrapper.sh
