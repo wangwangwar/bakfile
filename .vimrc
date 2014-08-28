@@ -225,7 +225,7 @@ Bundle 'bling/vim-airline'
 " code snippets
 Bundle 'drmingdrmer/xptemplate'
 " scheme, slimv
-Bundle 'vim-scripts/slimv.vim'
+"Bundle 'vim-scripts/slimv.vim'
 " DB, SQL
 Bundle 'vim-scripts/dbext.vim'
 " ML
@@ -324,8 +324,8 @@ let g:ycm_seed_identifiers_with_syntax = 1
 au FileType scheme setl ts=2 sw=2 sts=2
 
 """"""""""""""""" Racket """"""""""""""""""""""""""
-let g:paredit_mode = 0
-let g:slimv_swank_cmd = '! urxvt -e racket --load ~/.vim/bundle/slimv.vim/slime/contrib/swank-mit-scheme.scm &'
+"let g:paredit_mode = 0
+"let g:slimv_swank_cmd = '! urxvt -e racket --load ~/.vim/bundle/slimv.vim/slime/contrib/swank-mit-scheme.scm &'
 
 """"""""""""""""" JS """"""""""""""""""""""""""""""
 au filetype js set dictionary=~/.vim/dict/javascript.dict
