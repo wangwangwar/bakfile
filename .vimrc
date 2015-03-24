@@ -125,7 +125,7 @@ set showmatch
 set scrolloff=3
 "set guifont=DejaVu\ Sans\ Mono
 set guifont=Source\ Code\ Pro
-set guifontwide=WenQuanYi\ Zen\ Hei\ Sharp
+"set guifontwide=WenQuanYi\ Zen\ Hei\ Sharp
 " folding for html using indent
 set foldenable
 autocmd Filetype html set foldmethod=indent
@@ -141,45 +141,26 @@ set laststatus=2
 
 " import Vundle 
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 """"""""""" vim-scripts repos """""""""""""
 " speed the moving
 Bundle 'vim-scripts/EasyMotion'
-" pandoc's extended markdown
-"Bundle 'vim-scripts/vim-pandoc'
 " markdown syntax
 Bundle 'plasticboy/vim-markdown'
-"Bundle 'tpope/vim-markdown'
-" preview markdown, rdoc, textile, html
-"Bundle 'vim-scripts/preview'
-" add support for YAML and Liquid style to built-in markdown syntax
-"Bundle 'PProvost/vim-markdown-jekyll'
 " ctags
-Bundle 'vim-scripts/ctags.vim'
+"Bundle 'vim-scripts/ctags.vim'
 " cscope
-Bundle 'vim-scripts/cscope.vim'
-" OmniCppComplete
-"Bundle 'vim-scripts/OmniCppComplete'
-" 
-Bundle 'vim-scripts/autoload_cscope.vim'
-" nerdtree
-" Bundle 'scrooloose/nerdtree.git'
-" taglist
-Bundle 'vim-scripts/taglist.vim'
-" LustyExplorer
-"Bundle 'vim-scripts/LustyExplorer'
+"Bundle 'vim-scripts/cscope.vim'
+"Bundle 'vim-scripts/autoload_cscope.vim'
 " CtrlP
 Bundle 'kien/ctrlp.vim'
 " C extension for CtrlP
 Bundle 'JazzCore/ctrlp-cmatcher'
-" python 
-"Bundle 'vim-scripts/Pydiction'
 " python
-"Bundle 'davidhalter/jedi-vim'
 " python-mode, including vim-virtualenv, pyflask, pylint ...
 Bundle 'klen/python-mode'
 " python3 syntax and indent
@@ -188,48 +169,18 @@ Bundle 'mitsuhiko/vim-python-combined'
 Bundle 'Valloric/YouCompleteMe'
 " syntasitc 支持各种语法检查
 Bundle 'scrooloose/syntastic'
-" html5
-Bundle 'othree/html5.vim'
-" zen coding for vim
-Bundle 'mattn/emmet-vim'
-" css3
-Bundle 'hail2u/vim-css3-syntax'
-" css color preview
-Bundle 'chrisbra/color_highlight'
-let g:colorizer_auto_filetype='css,scss,html'
-" SCSS
-Bundle 'tpope/vim-haml'
-" Go
-"Bundle 'uggedal/go-vim'
-" nginx syntax
-Bundle 'evanmiller/nginx-vim-syntax'
-" git gutter
-Bundle 'airblade/vim-gitgutter.git'
-" vim-fugitive: git on vim
-Bundle 'tpope/vim-fugitive.git'
-" gitv: based on vim-fugitive
-Bundle 'gregsexton/gitv'
 " surround
 Bundle 'tpope/vim-surround'
-" javascript syntax and indent
-Bundle 'pangloss/vim-javascript'
-" javascript syntax
-Bundle 'jelera/vim-javascript-syntax'
-" js beautify
-Bundle 'maksimr/vim-jsbeautify'
-Bundle 'einars/js-beautify'
-" coffee script
-Bundle 'kchmck/vim-coffee-script'
 " vim airline, better status bar
 Bundle 'bling/vim-airline'
-" code snippets
-Bundle 'drmingdrmer/xptemplate'
 " scheme, slimv
 "Bundle 'vim-scripts/slimv.vim'
-" DB, SQL
-Bundle 'vim-scripts/dbext.vim'
 " ML
 Bundle 'vim-scripts/sml_polyml.vim'
+Bundle 'chilicuil/vim-sml-coursera'
+" io
+Plugin 'fmoralesc/vim-iolang'
+
 """"""""""" vim-scripts repos """""""""""""
 filetype plugin indent on
 
@@ -238,11 +189,6 @@ au FileType markdown setl noexpandtab
 
 " ctags for c file
 au FileType c setl tags=/wang/Programming/linux-source-3.5.0/tags
-
-" taglist
-nmap <F1> :silent! TlistToggle<CR>
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
 
 " cscope
 if has("cscope")
@@ -292,33 +238,27 @@ au FileType c setl tags+=/usr/include/tags
 
 """""""""""""""""  Python  """"""""""""""""""""""""
 au FileType python setl expandtab
-" path
-"set path+=/usr/local/lib/python2.7/dist-packages/douban_client-0.0.3-py2.7.egg
-"au FileType python setl tags=/usr/local/lib/python2.7/dist-packages/tags
-au FileType python setl tags+=/usr/lib/python2.7/tags
-au FileType python setl tags+=~/web/heroku_douban/venv/lib/python2.7/site-packages/werkzeug/tags
-au FileType python setl tags+=~/web/heroku_douban/venv/lib/python2.7/site-packages/jinja2/tags
-au FileType python setl tags+=~/program/python/tornado-master/tags
-au FileType python setl tags+=~/.virtualenvs/common/lib/python3.3/site-package/tags
 """"""""""""""""" pymode """"""""""""""""""""""""""
 " close rope
 let pymode_rope=0
 """"""""""""""""" syntastic """""""""""""""""""""""
 " Because we have `pymode` which is more powerful for python,
 " we disable `syntastic` in python.
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['python'] }
+"let g:syntastic_mode_map = { 'mode': 'active',
+"                           \ 'active_filetypes': [],
+"                           \ 'passive_filetypes': ['python'] }
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_javascript_jshint_args=['-c ~/.jshintrc']
 """""""""""""""" YouCompleteMe """"""""""""""""""""
-let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_key_invoke_completion = '<C-a>'
-let g:ycm_extra_conf_globlist = ['/*']
-let g:ycm_seed_identifiers_with_syntax = 1
-
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+"let g:ycm_add_preview_to_completeopt = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_key_invoke_completion = '<C-a>'
+"let g:ycm_extra_conf_globlist = ['/*']
+"let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_use_vim_stdout = 1
 
 """"""""""""""""" Scheme """"""""""""""""""""""""""
 au FileType scheme setl ts=2 sw=2 sts=2
@@ -327,35 +267,13 @@ au FileType scheme setl ts=2 sw=2 sts=2
 "let g:paredit_mode = 0
 "let g:slimv_swank_cmd = '! urxvt -e racket --load ~/.vim/bundle/slimv.vim/slime/contrib/swank-mit-scheme.scm &'
 
-""""""""""""""""" JS """"""""""""""""""""""""""""""
-au filetype js set dictionary=~/.vim/dict/javascript.dict
-" js beautify
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for html
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
-""""""""""""""""" HTML """"""""""""""""""""""""""""
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
-
-""""""""""""""""" CSS """""""""""""""""""""""""""""
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-
-""""""""""""""""" Nginx """""""""""""""""""""""""""
-au BufRead,BufNewFile /usr/local/openresty/nginx/conf/*,~/web/nginxtest/conf/* if &ft == '' | setfiletype nginx | endif
-
-""""""""""""""""" coffee """"""""""""""""""""""""""
-autocmd FileType coffee compiler coffee
-autocmd BufWritePost *.coffee silent make!
-" 定义 cfr  为CoffeeRun
-ab cfr CoffeeRun
-
 """"""""""""""""" git """""""""""""""""""""""""""""
 " git commit format
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 """"""""""""""""" Markdown """"""""""""""""""""""""
-autocmd Filetype markdown setlocal spell textwidth=72
+autocmd Filetype mkd setlocal spell
+
+"""""""""""""""""" Ruby """""""""""""""""""""""""""
+au FileType ruby setl ts=2 sw=2 sts=2
+au FileType cucumber setl ts=2 sw=2 sts=2
